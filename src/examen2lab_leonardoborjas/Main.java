@@ -5,6 +5,12 @@
  */
 package examen2lab_leonardoborjas;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -50,6 +56,11 @@ public class Main extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        Guardar = new javax.swing.JMenuItem();
+        Cargar = new javax.swing.JMenuItem();
+        Salirr = new javax.swing.JMenuItem();
 
         EliminarAl.setText("Eliminar");
         EliminarAl.setToolTipText("");
@@ -150,6 +161,36 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setText("File");
+
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Guardar);
+
+        Cargar.setText("Cargar");
+        Cargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Cargar);
+
+        Salirr.setText("Salir");
+        Salirr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirrActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Salirr);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,12 +223,45 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void escribir(String path, ArrayList m) {
+        File archivo=new File(path);
+        FileOutputStream fw = null;
+        ObjectOutputStream bw = null;
+        try {
+            fw = new FileOutputStream(archivo);
+            bw = new ObjectOutputStream(fw);
+            bw.writeObject(m);
+            bw.flush();
+        } catch (Exception e) {
+        }
+        try {
+            bw.close();
+            fw.close();
+        } catch (Exception e) {
+        }
+    }
+    
+    public ArrayList cargar(String path){
+        File archivo=new File(path);
+        ArrayList m=new ArrayList();
+        try {
+            if (archivo.exists()) {
+                FileInputStream entrada = new FileInputStream(archivo);
+                ObjectInputStream objeto = new ObjectInputStream(entrada);
+                m=(ArrayList)objeto.readObject();
+                objeto.close();
+                entrada.close();
+            }
+        } catch (Exception e) {
+        }
+        return m;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String arma = "";
@@ -289,7 +363,8 @@ public class Main extends javax.swing.JFrame {
                 break;
         }
         Aleman aleman = new Aleman(alias, edad, casta, arma, poder);
-
+        alemanes.add(aleman);
+        
         Aaleman.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Aleman")));
         DefaultTreeModel m = (DefaultTreeModel) Aaleman.getModel();
         DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
@@ -429,7 +504,7 @@ public class Main extends javax.swing.JFrame {
         DefaultMutableTreeNode t = (DefaultMutableTreeNode) Arusia.getLastSelectedPathComponent();
         Ruso ruso = (Ruso) t.getUserObject();
         rusos.remove(ruso);
-        
+
         Arusia.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Rusia")));
         DefaultTreeModel m = (DefaultTreeModel) Arusia.getModel();
         DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
@@ -449,7 +524,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultMutableTreeNode t = (DefaultMutableTreeNode) Arusia.getLastSelectedPathComponent();
         Ruso ruso = (Ruso) t.getUserObject();
-        
+
         String arma = "";
         int poder = 0;
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre del soldado");
@@ -479,7 +554,54 @@ public class Main extends javax.swing.JFrame {
         ruso.setRango(rango);
         ruso.setArma(arma);
         ruso.setPoder(poder);
+        
+        Arusia.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Rusia")));
+        DefaultTreeModel m = (DefaultTreeModel) Arusia.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
+        for (Ruso r : rusos) {
+            n.add(new DefaultMutableTreeNode(r));
+        }
     }//GEN-LAST:event_ModificarrActionPerformed
+
+    private void SalirrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirrActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_SalirrActionPerformed
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+        escribir("./Alemanes.sota",alemanes);
+        escribir("./Rusos.sota",rusos);
+        escribir("./Alumnos.sota",alumnos);
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
+        // TODO add your handling code here:
+        alemanes=cargar("./Alemanes.sota");
+        rusos=cargar("./Rusos.sota");
+        alumnos=cargar("./Alumnos.sota");
+        
+        Arusia.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Rusia")));
+        DefaultTreeModel m = (DefaultTreeModel) Arusia.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
+        for (Ruso r : rusos) {
+            n.add(new DefaultMutableTreeNode(r));
+        }
+        
+        Aaleman.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Aleman")));
+        m = (DefaultTreeModel) Aaleman.getModel();
+        n = (DefaultMutableTreeNode) m.getRoot();
+        for (Aleman a : alemanes) {
+            n.add(new DefaultMutableTreeNode(a));
+        }
+        
+        Aprogra2.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Programacion II")));
+        m = (DefaultTreeModel) Aprogra2.getModel();
+        n = (DefaultMutableTreeNode) m.getRoot();
+        for (Alumno a : alumnos) {
+            n.add(new DefaultMutableTreeNode(a));
+        }
+    }//GEN-LAST:event_CargarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -520,15 +642,20 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTree Aaleman;
     private javax.swing.JTree Aprogra2;
     private javax.swing.JTree Arusia;
+    private javax.swing.JMenuItem Cargar;
     private javax.swing.JMenuItem EliminarA;
     private javax.swing.JMenuItem EliminarAl;
     private javax.swing.JMenuItem Eliminarr;
+    private javax.swing.JMenuItem Guardar;
     private javax.swing.JMenuItem ModificarA;
     private javax.swing.JMenuItem ModificarAl;
     private javax.swing.JMenuItem Modificarr;
+    private javax.swing.JMenuItem Salirr;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -540,5 +667,4 @@ public class Main extends javax.swing.JFrame {
     ArrayList<Alumno> alumnos = new ArrayList();
     ArrayList<Ruso> rusos = new ArrayList();
     ArrayList<Aleman> alemanes = new ArrayList();
-
 }

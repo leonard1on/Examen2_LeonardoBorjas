@@ -5,11 +5,14 @@
  */
 package examen2lab_leonardoborjas;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Leonardo Borjas
  */
-public class Aleman {
+public class Aleman implements Serializable{
+    private static final long SerialVersionUID=666L;
     private String alias;
     private int edad;
     private String casta;
