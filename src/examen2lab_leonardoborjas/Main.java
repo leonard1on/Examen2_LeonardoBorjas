@@ -56,6 +56,7 @@ public class Main extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Guardar = new javax.swing.JMenuItem();
@@ -161,6 +162,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Simulación");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         Guardar.setText("Guardar");
@@ -196,18 +204,23 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -223,14 +236,16 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     public void escribir(String path, ArrayList m) {
-        File archivo=new File(path);
+        File archivo = new File(path);
         FileOutputStream fw = null;
         ObjectOutputStream bw = null;
         try {
@@ -246,15 +261,15 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-    
-    public ArrayList cargar(String path){
-        File archivo=new File(path);
-        ArrayList m=new ArrayList();
+
+    public ArrayList cargar(String path) {
+        File archivo = new File(path);
+        ArrayList m = new ArrayList();
         try {
             if (archivo.exists()) {
                 FileInputStream entrada = new FileInputStream(archivo);
                 ObjectInputStream objeto = new ObjectInputStream(entrada);
-                m=(ArrayList)objeto.readObject();
+                m = (ArrayList) objeto.readObject();
                 objeto.close();
                 entrada.close();
             }
@@ -364,7 +379,7 @@ public class Main extends javax.swing.JFrame {
         }
         Aleman aleman = new Aleman(alias, edad, casta, arma, poder);
         alemanes.add(aleman);
-        
+
         Aaleman.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Aleman")));
         DefaultTreeModel m = (DefaultTreeModel) Aaleman.getModel();
         DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
@@ -554,7 +569,7 @@ public class Main extends javax.swing.JFrame {
         ruso.setRango(rango);
         ruso.setArma(arma);
         ruso.setPoder(poder);
-        
+
         Arusia.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Rusia")));
         DefaultTreeModel m = (DefaultTreeModel) Arusia.getModel();
         DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
@@ -570,31 +585,31 @@ public class Main extends javax.swing.JFrame {
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-        escribir("./Alemanes.sota",alemanes);
-        escribir("./Rusos.sota",rusos);
-        escribir("./Alumnos.sota",alumnos);
+        escribir("./Archivos/Alemanes.sota", alemanes);
+        escribir("./Archivos/Rusos.sota", rusos);
+        escribir("./Archivos/Alumnos.sota", alumnos);
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
         // TODO add your handling code here:
-        alemanes=cargar("./Alemanes.sota");
-        rusos=cargar("./Rusos.sota");
-        alumnos=cargar("./Alumnos.sota");
-        
+        alemanes = cargar("./Archivos/Alemanes.sota");
+        rusos = cargar("./Archivos/Rusos.sota");
+        alumnos = cargar("./Archivos/Alumnos.sota");
+
         Arusia.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Rusia")));
         DefaultTreeModel m = (DefaultTreeModel) Arusia.getModel();
         DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
         for (Ruso r : rusos) {
             n.add(new DefaultMutableTreeNode(r));
         }
-        
+
         Aaleman.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Aleman")));
         m = (DefaultTreeModel) Aaleman.getModel();
         n = (DefaultMutableTreeNode) m.getRoot();
         for (Aleman a : alemanes) {
             n.add(new DefaultMutableTreeNode(a));
         }
-        
+
         Aprogra2.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Programacion II")));
         m = (DefaultTreeModel) Aprogra2.getModel();
         n = (DefaultMutableTreeNode) m.getRoot();
@@ -602,6 +617,175 @@ public class Main extends javax.swing.JFrame {
             n.add(new DefaultMutableTreeNode(a));
         }
     }//GEN-LAST:event_CargarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int algo = 0;
+        do {
+            //1-3
+            int j = 0;
+            if (rusos.isEmpty() || alemanes.isEmpty()) {
+            } else {
+                for (int i = 0; i < rusos.size(); i++) {
+
+                    if (i >= alemanes.size() - 1) {
+
+                    } else {
+                        j = i;
+                    }
+                    int vidaenemiga = alemanes.get(j).getResistencia();
+                    int ataque = rusos.get(i).getPoder();
+                    int restante = vidaenemiga - ataque;
+                    alemanes.get(j).setResistencia(restante);
+                    if (restante <= 0) {
+                        alemanes.remove(i);
+                    }
+                }
+            }
+
+            //1-2
+            j = 0;
+            if (rusos.isEmpty() || alumnos.isEmpty()) {
+            } else {
+                for (int i = 0; i < rusos.size(); i++) {
+
+                    if (i >= alumnos.size() - 1) {
+
+                    } else {
+                        j = i;
+                    }
+                    int vidaenemiga = alumnos.get(j).getResistencia();
+                    int ataque = rusos.get(i).getPoder();
+                    int restante = vidaenemiga - ataque;
+                    alumnos.get(j).setResistencia(restante);
+                    if (restante <= 0) {
+                        alumnos.remove(i);
+                    }
+
+                }
+            }
+            //2-3
+            j = 0;
+            if (alumnos.isEmpty() || alemanes.isEmpty()) {
+            } else {
+                for (int i = 0; i < alumnos.size(); i++) {
+
+                    if (i >= alemanes.size() - 1) {
+
+                    } else {
+                        j = i;
+                    }
+                    int vidaenemiga = alemanes.get(j).getResistencia();
+                    int ataque = alumnos.get(i).getPoder();
+                    int restante = vidaenemiga - ataque;
+                    alemanes.get(j).setResistencia(restante);
+                    if (restante <= 0) {
+                        alemanes.remove(i);
+                    }
+                }
+            }
+
+            //2-1
+            j = 0;
+            if (alumnos.isEmpty() || rusos.isEmpty()) {
+            } else {
+                for (int i = 0; i < rusos.size(); i++) {
+
+                    if (i >= rusos.size() - 1) {
+
+                    } else {
+                        j = i;
+                    }
+                    int vidaenemiga = rusos.get(j).getResistencia();
+                    int ataque = alumnos.get(i).getPoder();
+                    int restante = vidaenemiga - ataque;
+                    rusos.get(j).setResistencia(restante);
+                    if (restante <= 0) {
+                        rusos.remove(i);
+                    }
+                }
+            }
+            //3-1
+            j = 0;
+            if (alemanes.isEmpty() || rusos.isEmpty()) {
+            } else {
+                for (int i = 0; i < rusos.size(); i++) {
+
+                    if (i >= rusos.size() - 1) {
+
+                    } else {
+                        j = i;
+                    }
+                    int vidaenemiga = rusos.get(j).getResistencia();
+                    int ataque = alemanes.get(i).getPoder();
+                    int restante = vidaenemiga - ataque;
+                    rusos.get(j).setResistencia(restante);
+                    if (restante <= 0) {
+                        rusos.remove(i);
+                    }
+                }
+            }
+
+            //3-2
+            j = 0;
+            if (alemanes.isEmpty() || alumnos.isEmpty()) {
+            } else {
+                for (int i = 0; i < alumnos.size(); i++) {
+
+                    if (i >= alumnos.size() - 1) {
+
+                    } else {
+                        j = i;
+                    }
+                    int vidaenemiga = alumnos.get(j).getResistencia();
+                    int ataque = alemanes.get(i).getPoder();
+                    int restante = vidaenemiga - ataque;
+                    alumnos.get(j).setResistencia(restante);
+                    if (restante <= 0) {
+                        alumnos.remove(i);
+                    }
+                }
+            }
+
+            if (alemanes.isEmpty() && alumnos.isEmpty() && rusos.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Empate");
+                algo=2;
+            } else {
+                if (alemanes.isEmpty() && alumnos.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ganaron los Rusos");
+                    algo=2;
+                }
+                if (rusos.isEmpty() && alumnos.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ganaron los Alemanes");
+                    algo=2;
+                }
+                if (alemanes.isEmpty() && rusos.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Ganaron los Alumnos");
+                    algo=2;
+                }
+            }
+        } while (algo < 2);
+        Arusia.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Rusia")));
+        DefaultTreeModel m = (DefaultTreeModel) Arusia.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
+        for (Ruso r : rusos) {
+            n.add(new DefaultMutableTreeNode(r));
+        }
+
+        Aaleman.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Aleman")));
+        m = (DefaultTreeModel) Aaleman.getModel();
+        n = (DefaultMutableTreeNode) m.getRoot();
+        for (Aleman a : alemanes) {
+            n.add(new DefaultMutableTreeNode(a));
+        }
+
+        Aprogra2.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Programacion II")));
+        m = (DefaultTreeModel) Aprogra2.getModel();
+        n = (DefaultMutableTreeNode) m.getRoot();
+        for (Alumno a : alumnos) {
+            n.add(new DefaultMutableTreeNode(a));
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -654,6 +838,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
