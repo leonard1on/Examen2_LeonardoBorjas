@@ -284,36 +284,41 @@ public class Main extends javax.swing.JFrame {
         String apodo = JOptionPane.showInputDialog("Ingrese el apodo del soldado");
         int cuenta = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de cuenta del soldado"));
         int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del soldado"));
-        String grado = JOptionPane.showInputDialog("Ingrese el Grado Academico del soldado");
-        int pasar = Integer.parseInt(JOptionPane.showInputDialog("Elija el arma del soldado\n"
-                + "1. Discos Duros (PdF=23)\n2. Controles de Wii (PdF=47)"
-                + "\n3. Laptops (PdF=76)"));
 
-        switch (pasar) {
-            case 1:
-                arma = "Discos Duros";
-                poder = 23;
-                break;
-            case 2:
-                arma = "Controles de Wii";
-                poder = 47;
-                break;
-            case 3:
-                arma = "Laptops";
-                poder = 76;
-                break;
+        if (edad >= 16) {
+
+            String grado = JOptionPane.showInputDialog("Ingrese el Grado Academico del soldado");
+            int pasar = Integer.parseInt(JOptionPane.showInputDialog("Elija el arma del soldado\n"
+                    + "1. Discos Duros (PdF=23)\n2. Controles de Wii (PdF=47)"
+                    + "\n3. Laptops (PdF=76)"));
+
+            switch (pasar) {
+                case 1:
+                    arma = "Discos Duros";
+                    poder = 23;
+                    break;
+                case 2:
+                    arma = "Controles de Wii";
+                    poder = 47;
+                    break;
+                case 3:
+                    arma = "Laptops";
+                    poder = 76;
+                    break;
+            }
+
+            Alumno alumno = new Alumno(apodo, cuenta, edad, grado, arma, poder);
+            alumnos.add(alumno);
+
+            Aprogra2.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Programacion II")));
+            DefaultTreeModel m = (DefaultTreeModel) Aprogra2.getModel();
+            DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
+            for (Alumno a : alumnos) {
+                n.add(new DefaultMutableTreeNode(a));
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Soldado menor de edad");
         }
-
-        Alumno alumno = new Alumno(apodo, cuenta, edad, grado, arma, poder);
-        alumnos.add(alumno);
-
-        Aprogra2.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Programacion II")));
-        DefaultTreeModel m = (DefaultTreeModel) Aprogra2.getModel();
-        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
-        for (Alumno a : alumnos) {
-            n.add(new DefaultMutableTreeNode(a));
-        }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -359,6 +364,9 @@ public class Main extends javax.swing.JFrame {
         int poder = 0;
         String alias = JOptionPane.showInputDialog("Ingrese el alias del soldado");
         int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del soldado"));
+        if (edad>=16) {
+            
+       
         String casta = JOptionPane.showInputDialog("Ingrese la Casta del soldado");
         int pasar = Integer.parseInt(JOptionPane.showInputDialog("Elija el arma del soldado\n"
                 + "1. Subfusil MP 40 (PdF=25)\n2. Ametralladora MG42 (PdF=32)"
@@ -385,6 +393,9 @@ public class Main extends javax.swing.JFrame {
         DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
         for (Aleman a : alemanes) {
             n.add(new DefaultMutableTreeNode(a));
+        }
+        }else{
+            JOptionPane.showMessageDialog(this, "Soldado menor de edad");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -588,6 +599,7 @@ public class Main extends javax.swing.JFrame {
         escribir("./Archivos/Alemanes.sota", alemanes);
         escribir("./Archivos/Rusos.sota", rusos);
         escribir("./Archivos/Alumnos.sota", alumnos);
+        JOptionPane.showMessageDialog(this, "Soldado menor de edad");
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
@@ -638,7 +650,7 @@ public class Main extends javax.swing.JFrame {
                     int restante = vidaenemiga - ataque;
                     alemanes.get(j).setResistencia(restante);
                     if (restante <= 0) {
-                        alemanes.remove(i);
+                        alemanes.remove(j);
                     }
                 }
             }
@@ -659,7 +671,7 @@ public class Main extends javax.swing.JFrame {
                     int restante = vidaenemiga - ataque;
                     alumnos.get(j).setResistencia(restante);
                     if (restante <= 0) {
-                        alumnos.remove(i);
+                        alumnos.remove(j);
                     }
 
                 }
@@ -680,7 +692,7 @@ public class Main extends javax.swing.JFrame {
                     int restante = vidaenemiga - ataque;
                     alemanes.get(j).setResistencia(restante);
                     if (restante <= 0) {
-                        alemanes.remove(i);
+                        alemanes.remove(j);
                     }
                 }
             }
@@ -701,7 +713,7 @@ public class Main extends javax.swing.JFrame {
                     int restante = vidaenemiga - ataque;
                     rusos.get(j).setResistencia(restante);
                     if (restante <= 0) {
-                        rusos.remove(i);
+                        rusos.remove(j);
                     }
                 }
             }
@@ -721,7 +733,7 @@ public class Main extends javax.swing.JFrame {
                     int restante = vidaenemiga - ataque;
                     rusos.get(j).setResistencia(restante);
                     if (restante <= 0) {
-                        rusos.remove(i);
+                        rusos.remove(j);
                     }
                 }
             }
@@ -742,26 +754,26 @@ public class Main extends javax.swing.JFrame {
                     int restante = vidaenemiga - ataque;
                     alumnos.get(j).setResistencia(restante);
                     if (restante <= 0) {
-                        alumnos.remove(i);
+                        alumnos.remove(j);
                     }
                 }
             }
 
             if (alemanes.isEmpty() && alumnos.isEmpty() && rusos.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Empate");
-                algo=2;
+                algo = 2;
             } else {
                 if (alemanes.isEmpty() && alumnos.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Ganaron los Rusos");
-                    algo=2;
+                    algo = 2;
                 }
                 if (rusos.isEmpty() && alumnos.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Ganaron los Alemanes");
-                    algo=2;
+                    algo = 2;
                 }
                 if (alemanes.isEmpty() && rusos.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Ganaron los Alumnos");
-                    algo=2;
+                    algo = 2;
                 }
             }
         } while (algo < 2);
