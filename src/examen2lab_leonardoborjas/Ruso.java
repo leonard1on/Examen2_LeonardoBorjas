@@ -92,7 +92,7 @@ public class Ruso implements Serializable{
 
     @Override
     public String toString() {
-        return nombre  ;
+        return nombre+": "+"Resistencia="+resistencia+", Ataque="+poder ;
     }
     
     
