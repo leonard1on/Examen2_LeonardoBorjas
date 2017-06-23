@@ -32,6 +32,15 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popup = new javax.swing.JPopupMenu();
+        EliminarAl = new javax.swing.JMenuItem();
+        ModificarAl = new javax.swing.JMenuItem();
+        popup2 = new javax.swing.JPopupMenu();
+        EliminarA = new javax.swing.JMenuItem();
+        ModificarA = new javax.swing.JMenuItem();
+        popup3 = new javax.swing.JPopupMenu();
+        Eliminarr = new javax.swing.JMenuItem();
+        Modificarr = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         Aprogra2 = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -42,35 +51,99 @@ public class Main extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
+        EliminarAl.setText("Eliminar");
+        EliminarAl.setToolTipText("");
+        EliminarAl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarAlActionPerformed(evt);
+            }
+        });
+        popup.add(EliminarAl);
+
+        ModificarAl.setText("Modificar");
+        ModificarAl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarAlActionPerformed(evt);
+            }
+        });
+        popup.add(ModificarAl);
+
+        EliminarA.setText("Eliminar");
+        EliminarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarAActionPerformed(evt);
+            }
+        });
+        popup2.add(EliminarA);
+
+        ModificarA.setText("Modificar");
+        ModificarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarAActionPerformed(evt);
+            }
+        });
+        popup2.add(ModificarA);
+
+        Eliminarr.setText("Eliminar");
+        Eliminarr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarrActionPerformed(evt);
+            }
+        });
+        popup3.add(Eliminarr);
+
+        Modificarr.setText("Modificar");
+        Modificarr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarrActionPerformed(evt);
+            }
+        });
+        popup3.add(Modificarr);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Programacion II");
         Aprogra2.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        Aprogra2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Aprogra2MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Aprogra2);
 
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Rusia");
         Arusia.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        Arusia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ArusiaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(Arusia);
 
         treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Aleman");
         Aaleman.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        Aaleman.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AalemanMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(Aaleman);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Agregar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("jButton3");
+        jButton3.setText("Agregar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -126,7 +199,7 @@ public class Main extends javax.swing.JFrame {
         int pasar = Integer.parseInt(JOptionPane.showInputDialog("Elija el arma del soldado\n"
                 + "1. Discos Duros (PdF=23)\n2. Controles de Wii (PdF=47)"
                 + "\n3. Laptops (PdF=76)"));
-        
+
         switch (pasar) {
             case 1:
                 arma = "Discos Duros";
@@ -141,13 +214,13 @@ public class Main extends javax.swing.JFrame {
                 poder = 76;
                 break;
         }
-        
+
         Alumno alumno = new Alumno(apodo, cuenta, edad, grado, arma, poder);
         alumnos.add(alumno);
-        
+
         Aprogra2.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Programacion II")));
-        DefaultTreeModel m=(DefaultTreeModel)Aprogra2.getModel();
-        DefaultMutableTreeNode n=(DefaultMutableTreeNode)m.getRoot();
+        DefaultTreeModel m = (DefaultTreeModel) Aprogra2.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
         for (Alumno a : alumnos) {
             n.add(new DefaultMutableTreeNode(a));
         }
@@ -179,15 +252,15 @@ public class Main extends javax.swing.JFrame {
                 poder = 57;
                 break;
         }
-        
+
         Ruso ruso = new Ruso(nombre, id, edad, rango, arma, poder);
         rusos.add(ruso);
-        
+
         Arusia.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Rusia")));
-        DefaultTreeModel m=(DefaultTreeModel)Arusia.getModel();
-        DefaultMutableTreeNode n=(DefaultMutableTreeNode)m.getRoot();
+        DefaultTreeModel m = (DefaultTreeModel) Arusia.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
         for (Ruso r : rusos) {
-           n.add(new DefaultMutableTreeNode(r));
+            n.add(new DefaultMutableTreeNode(r));
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -215,15 +288,198 @@ public class Main extends javax.swing.JFrame {
                 poder = 11;
                 break;
         }
-        Aleman aleman=new Aleman(alias,edad,casta,arma,poder);
-        
+        Aleman aleman = new Aleman(alias, edad, casta, arma, poder);
+
         Aaleman.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Aleman")));
-        DefaultTreeModel m=(DefaultTreeModel)Aaleman.getModel();
-        DefaultMutableTreeNode n=(DefaultMutableTreeNode)m.getRoot();
+        DefaultTreeModel m = (DefaultTreeModel) Aaleman.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
         for (Aleman a : alemanes) {
             n.add(new DefaultMutableTreeNode(a));
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void Aprogra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Aprogra2MouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            popup.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_Aprogra2MouseClicked
+
+    private void EliminarAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarAlActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode t = (DefaultMutableTreeNode) Aprogra2.getLastSelectedPathComponent();
+        Alumno alumno = (Alumno) t.getUserObject();
+        alumnos.remove(alumno);
+
+        Aprogra2.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Programacion II")));
+        DefaultTreeModel m = (DefaultTreeModel) Aprogra2.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
+        for (Alumno a : alumnos) {
+            n.add(new DefaultMutableTreeNode(a));
+        }
+    }//GEN-LAST:event_EliminarAlActionPerformed
+
+    private void ModificarAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarAlActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode t = (DefaultMutableTreeNode) Aprogra2.getLastSelectedPathComponent();
+        Alumno alumno = (Alumno) t.getUserObject();
+        String arma = "";
+        int poder = 0;
+        String apodo = JOptionPane.showInputDialog("Ingrese el apodo del soldado");
+        int cuenta = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de cuenta del soldado"));
+        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del soldado"));
+        String grado = JOptionPane.showInputDialog("Ingrese el Grado Academico del soldado");
+        int pasar = Integer.parseInt(JOptionPane.showInputDialog("Elija el arma del soldado\n"
+                + "1. Discos Duros (PdF=23)\n2. Controles de Wii (PdF=47)"
+                + "\n3. Laptops (PdF=76)"));
+
+        switch (pasar) {
+            case 1:
+                arma = "Discos Duros";
+                poder = 23;
+                break;
+            case 2:
+                arma = "Controles de Wii";
+                poder = 47;
+                break;
+            case 3:
+                arma = "Laptops";
+                poder = 76;
+                break;
+        }
+        alumno.setApodo(apodo);
+        alumno.setCuenta(cuenta);
+        alumno.setEdad(edad);
+        alumno.setGrado(grado);
+        alumno.setArma(arma);
+        alumno.setPoder(poder);
+
+        Aprogra2.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Programacion II")));
+        DefaultTreeModel m = (DefaultTreeModel) Aprogra2.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
+        for (Alumno a : alumnos) {
+            n.add(new DefaultMutableTreeNode(a));
+        }
+    }//GEN-LAST:event_ModificarAlActionPerformed
+
+    private void AalemanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AalemanMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            popup2.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_AalemanMouseClicked
+
+    private void EliminarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarAActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode t = (DefaultMutableTreeNode) Aaleman.getLastSelectedPathComponent();
+        Aleman aleman = (Aleman) t.getUserObject();
+        alemanes.remove(aleman);
+
+        Aaleman.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Aleman")));
+        DefaultTreeModel m = (DefaultTreeModel) Aaleman.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
+        for (Aleman a : alemanes) {
+            n.add(new DefaultMutableTreeNode(a));
+        }
+    }//GEN-LAST:event_EliminarAActionPerformed
+
+    private void ModificarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarAActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode t = (DefaultMutableTreeNode) Aaleman.getLastSelectedPathComponent();
+        Aleman aleman = (Aleman) t.getUserObject();
+
+        String arma = "";
+        int poder = 0;
+        String alias = JOptionPane.showInputDialog("Ingrese el alias del soldado");
+        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del soldado"));
+        String casta = JOptionPane.showInputDialog("Ingrese la Casta del soldado");
+        int pasar = Integer.parseInt(JOptionPane.showInputDialog("Elija el arma del soldado\n"
+                + "1. Subfusil MP 40 (PdF=25)\n2. Ametralladora MG42 (PdF=32)"
+                + "\n3. Pistolas Walther P38 (PdF=11)"));
+        switch (pasar) {
+            case 1:
+                arma = "Subfusil MP 40";
+                poder = 25;
+                break;
+            case 2:
+                arma = "Ametralladora MG42";
+                poder = 32;
+                break;
+            case 3:
+                arma = "Pistolas Walther P38";
+                poder = 11;
+                break;
+        }
+        aleman.setAlias(alias);
+        aleman.setEdad(edad);
+        aleman.setCasta(casta);
+        aleman.setArma(arma);
+        aleman.setPoder(poder);
+
+        Aaleman.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Aleman")));
+        DefaultTreeModel m = (DefaultTreeModel) Aaleman.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
+        for (Aleman a : alemanes) {
+            n.add(new DefaultMutableTreeNode(a));
+        }
+    }//GEN-LAST:event_ModificarAActionPerformed
+
+    private void EliminarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarrActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode t = (DefaultMutableTreeNode) Arusia.getLastSelectedPathComponent();
+        Ruso ruso = (Ruso) t.getUserObject();
+        rusos.remove(ruso);
+        
+        Arusia.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Rusia")));
+        DefaultTreeModel m = (DefaultTreeModel) Arusia.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
+        for (Ruso r : rusos) {
+            n.add(new DefaultMutableTreeNode(r));
+        }
+    }//GEN-LAST:event_EliminarrActionPerformed
+
+    private void ArusiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ArusiaMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            popup3.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_ArusiaMouseClicked
+
+    private void ModificarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarrActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode t = (DefaultMutableTreeNode) Arusia.getLastSelectedPathComponent();
+        Ruso ruso = (Ruso) t.getUserObject();
+        
+        String arma = "";
+        int poder = 0;
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre del soldado");
+        int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del soldado"));
+        int edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del soldado"));
+        String rango = ("Ingrese el rango del soldado");
+        int pasar = Integer.parseInt(JOptionPane.showInputDialog("Elija el arma del soldado\n"
+                + "1. AK-47 (PdF=27)\n2. Revolver Navant (PdF=13)"
+                + "\n3. RPG-7 (PdF=57)"));
+        switch (pasar) {
+            case 1:
+                arma = "AK-47";
+                poder = 27;
+                break;
+            case 2:
+                arma = "Revolver Navant";
+                poder = 13;
+                break;
+            case 3:
+                arma = "RPG-7";
+                poder = 57;
+                break;
+        }
+        ruso.setNombre(nombre);
+        ruso.setId(id);
+        ruso.setEdad(edad);
+        ruso.setRango(rango);
+        ruso.setArma(arma);
+        ruso.setPoder(poder);
+    }//GEN-LAST:event_ModificarrActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,12 +520,21 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTree Aaleman;
     private javax.swing.JTree Aprogra2;
     private javax.swing.JTree Arusia;
+    private javax.swing.JMenuItem EliminarA;
+    private javax.swing.JMenuItem EliminarAl;
+    private javax.swing.JMenuItem Eliminarr;
+    private javax.swing.JMenuItem ModificarA;
+    private javax.swing.JMenuItem ModificarAl;
+    private javax.swing.JMenuItem Modificarr;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPopupMenu popup;
+    private javax.swing.JPopupMenu popup2;
+    private javax.swing.JPopupMenu popup3;
     // End of variables declaration//GEN-END:variables
 
     ArrayList<Alumno> alumnos = new ArrayList();
